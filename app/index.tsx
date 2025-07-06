@@ -31,12 +31,12 @@ export default function Index() {
 
   return (
     <>
-      <View className="flex-1 px-4 pt-10 bg-white w-full">
-        <Text className="text-xl font-bold text-blue-500">Welcome to SnookerMate!</Text>
-        <View className="mb-4">
-          <Text className="mb-2 text-base font-medium text-gray-800">Email</Text>
+      <View className="flex-1 m-4">
+        <Text className="mt-5 text-xl font-bold text-blue-500">Welcome to SnookerMate!</Text>
+        <View className="my-1">
+          <Text className="mb-1 text-base font-medium text-gray-800">Email</Text>
           <TextInput
-            className="h-11 px-3 border border-gray-300 rounded-md"
+            className="h-11 border border-gray-300 rounded-md"
             placeholder="email@address.com"
             onChangeText={setEmail}
             value={email}
@@ -45,10 +45,10 @@ export default function Index() {
           />
         </View>
 
-        <View className="mb-4">
-          <Text className="mb-2 text-base font-medium text-gray-800">Password</Text>
+        <View className="my-1">
+          <Text className="mb-1 text-base font-medium text-gray-800">Password</Text>
           <TextInput
-            className="h-11 px-3 border border-gray-300 rounded-md"
+            className="h-11 border border-gray-300 rounded-md"
             placeholder="Password"
             onChangeText={setPassword}
             value={password}
@@ -57,9 +57,9 @@ export default function Index() {
           />
         </View>
 
-        <View className="mb-4">
+        <View className="my-1">
           <TouchableOpacity
-            className={`bg-blue-600 rounded-md py-3 items-center ${loading ? 'opacity-50' : ''
+            className={`h-11 bg-blue-600 rounded-md items-center justify-center ${loading ? 'opacity-50' : ''
               }`}
             onPress={signInWithEmail}
             disabled={loading}
@@ -72,9 +72,21 @@ export default function Index() {
           </TouchableOpacity>
         </View>
 
-        <View className="mb-4">
+        <View className="my-1">
           <Link href="./signup">
             <Text className="text-blue-600 font-semibold">Already Not A User!!! Please Sign up</Text>
+          </Link>
+        </View>
+
+        <View className="my-1">
+          <Link href="./tailwind">
+            <Text className="text-blue-600 font-semibold">TailWind</Text>
+          </Link>
+        </View>
+
+        <View className="my-1">
+          <Link href="./signinnew">
+            <Text className="text-blue-600 font-semibold">Sign In New</Text>
           </Link>
         </View>
       </View>

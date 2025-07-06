@@ -43,9 +43,9 @@ export default function SignUp() {
   }
 
   return (
-    <View className="flex-1 px-4 pt-10 bg-white w-full">
-      <View className="mb-4">
-        <Text className="mb-2 text-base font-medium text-gray-800">Name</Text>
+    <View className="flex-1 m-4">
+      <View className="my-1">
+        <Text className="mb-1 text-base font-medium text-gray-800">Name</Text>
         <TextInput
           className="h-11 px-3 border border-gray-300 rounded-md"
           placeholder="Stephen Hendry"
@@ -54,10 +54,10 @@ export default function SignUp() {
           autoCapitalize="none"
         />
       </View>
-      <View className="mb-4">
-        <Text className="mb-2 text-base font-medium text-gray-800">Email</Text>
+      <View className="my-1">
+        <Text className="mb-1 text-base font-medium text-gray-800">Email</Text>
         <TextInput
-          className="h-11 px-3 border border-gray-300 rounded-md"
+          className="h-11 border border-gray-300 rounded-md"
           placeholder="stephen.hendry@gmail.com"
           onChangeText={setEmail}
           value={email}
@@ -66,10 +66,10 @@ export default function SignUp() {
         />
       </View>
 
-      <View className="mb-4">
-        <Text className="mb-2 text-base font-medium text-gray-800">Password</Text>
+      <View className="my-1">
+        <Text className="mb-1 text-base font-medium text-gray-800">Password</Text>
         <TextInput
-          className="h-11 px-3 border border-gray-300 rounded-md"
+          className="h-11 border border-gray-300 rounded-md"
           placeholder="Password"
           onChangeText={setPassword}
           value={password}
@@ -80,7 +80,7 @@ export default function SignUp() {
 
       <View>
         <TouchableOpacity
-          className={`bg-green-600 rounded-md py-3 items-center ${
+          className={`my-3 h-11 bg-green-600 rounded-md items-center justify-center ${
             loading ? 'opacity-50' : ''
           }`}
           onPress={signUpWithEmail}
