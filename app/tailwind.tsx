@@ -20,3 +20,4 @@ export default function TailWind() {
 // Each children will have my-1, TextInput by default has h-11 for others put h-11 manually
 // my-1 inside childeren will mb-1 except last
 // text-xs/sm/medium/lg/xl-n will make your size bigger or smaller, in that case no need to apply h-11
+// each textinput should have px-3 so that text entered has paading x of 3

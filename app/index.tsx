@@ -25,7 +25,11 @@ export default function Index() {
       email,
       password,
     });
-    if (error) Alert.alert(error.message);
+    if (error) {
+      Alert.alert(error.message);
+    } else {
+      Alert.alert('Logged in successfully');
+    }
     setLoading(false);
   }
 
@@ -84,11 +88,6 @@ export default function Index() {
           </Link>
         </View>
 
-        <View className="my-1">
-          <Link href="./signinnew">
-            <Text className="text-blue-600 font-semibold">Sign In New</Text>
-          </Link>
-        </View>
       </View>
     </>
   );
