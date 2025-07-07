@@ -57,12 +57,23 @@ export default function SignUp() {
     }
     if(email.trim() === '') {
       errors.push('email.empty');
+    } else {
+      // Simple email regex for validation
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        errors.push('email.invalid');
+      }
     }
     if(password.trim() === '') {
       errors.push('password.empty');
+    } else if(password.length < 6) {
+      errors.push('password.short');
     }
     if(confirmPassword.trim() === '') {
       errors.push('confirmPassword.empty');
+    }
+    if(password.trim() !== '' && confirmPassword.trim() !== '' && password !== confirmPassword) {
+      errors.push('password.mismatch');
     }
     return errors;
   }
@@ -91,6 +102,7 @@ export default function SignUp() {
           keyboardType="email-address"
         />
         {errors.includes('email.empty') && <Text className="mb-1 text-base font-medium text-red-600">Error : Email should not be empty</Text>}
+        {errors.includes('email.invalid') && <Text className="mb-1 text-base font-medium text-red-600">Error : Email is not valid</Text>}
       </View>
 
       <View className="my-1">
@@ -104,6 +116,8 @@ export default function SignUp() {
           autoCapitalize="none"
         />
         {errors.includes('password.empty') && <Text className="mb-1 text-base font-medium text-red-600">Error : Password should not be empty</Text>}
+        {errors.includes('password.short') && <Text className="mb-1 text-base font-medium text-red-600">Error : Password should be at least 6 characters</Text>}
+        {errors.includes('password.mismatch') && <Text className="mb-1 text-base font-medium text-red-600">Error : Password and Confirm Password should be same</Text>}
       </View>
       <View className="my-1">
         <Text className="mb-1 text-base font-medium text-gray-800">Confirm Password</Text>
@@ -116,6 +130,7 @@ export default function SignUp() {
           autoCapitalize="none"
         />
         {errors.includes('confirmPassword.empty') && <Text className="mb-1 text-base font-medium text-red-600">Error : Confirm Password should not be empty</Text>}
+        {errors.includes('password.mismatch') && <Text className="mb-1 text-base font-medium text-red-600">Error : Password and Confirm Password should be same</Text>}
       </View>
 
       <View>
