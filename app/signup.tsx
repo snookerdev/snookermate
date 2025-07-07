@@ -9,8 +9,16 @@ export default function SignUp() {
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [name, setName] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [errors, setErrors] = useState<string[]>([]);
 
   async function signUpWithEmail() {
+    const validationErrors = getValidationErrors();
+    setErrors(getValidationErrors());
+    if (validationErrors.length > 0) {
+      return;
+    }
+
     setLoading(true);
     const {
       data: { session },
@@ -42,6 +50,23 @@ export default function SignUp() {
     setLoading(false);
   }
 
+  function getValidationErrors () : string[] {
+    const errors : string[] = [];
+    if(name.trim() === '') {
+      errors.push('name.empty');
+    }
+    if(email.trim() === '') {
+      errors.push('email.empty');
+    }
+    if(password.trim() === '') {
+      errors.push('password.empty');
+    }
+    if(confirmPassword.trim() === '') {
+      errors.push('confirmPassword.empty');
+    }
+    return errors;
+  }
+
   return (
     <View className="flex-1 m-4">
       <View className="my-1">
@@ -53,6 +78,7 @@ export default function SignUp() {
           value={name}
           autoCapitalize="none"
         />
+        {errors.includes('name.empty') && <Text className="mb-1 text-base font-medium text-red-600">Error : Name should not be empty</Text>}
       </View>
       <View className="my-1">
         <Text className="mb-1 text-base font-medium text-gray-800">Email</Text>
@@ -64,6 +90,7 @@ export default function SignUp() {
           autoCapitalize="none"
           keyboardType="email-address"
         />
+        {errors.includes('email.empty') && <Text className="mb-1 text-base font-medium text-red-600">Error : Email should not be empty</Text>}
       </View>
 
       <View className="my-1">
@@ -76,6 +103,19 @@ export default function SignUp() {
           secureTextEntry
           autoCapitalize="none"
         />
+        {errors.includes('password.empty') && <Text className="mb-1 text-base font-medium text-red-600">Error : Password should not be empty</Text>}
+      </View>
+      <View className="my-1">
+        <Text className="mb-1 text-base font-medium text-gray-800">Confirm Password</Text>
+        <TextInput
+          className="h-11 px-3 border border-gray-300 rounded-md"
+          placeholder="Confirm Password"
+          onChangeText={setConfirmPassword}
+          value={confirmPassword}
+          secureTextEntry
+          autoCapitalize="none"
+        />
+        {errors.includes('confirmPassword.empty') && <Text className="mb-1 text-base font-medium text-red-600">Error : Confirm Password should not be empty</Text>}
       </View>
 
       <View>
