@@ -29,7 +29,8 @@ export default function SignUp() {
       options : {
         data : {
           name : name
-        }
+        },
+        emailRedirectTo: 'https://snookerdev.github.io/snookermate/welcome'
       }
     });
 
