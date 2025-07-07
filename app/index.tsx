@@ -9,6 +9,7 @@ export default function Index() {
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [session, setSession] = useState<Session | null>(null);
+  const [errors, setErrors] = useState<string[]>([]);
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -19,7 +20,28 @@ export default function Index() {
     })
   }, [])
 
+  function getValidationErrors () : string[] {
+    const errors : string[] = [];
+    if(email.trim() === '') {
+      errors.push('email.empty');
+    } else {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        errors.push('email.invalid');
+      }
+    }
+    if(password.trim() === '') {
+      errors.push('password.empty');
+    }
+    return errors;
+  }
+
   async function signInWithEmail() {
+    const validationErrors = getValidationErrors();
+    setErrors(getValidationErrors());
+    if (validationErrors.length > 0) {
+      return;
+    }
     setLoading(true);
     const { error } = await supabase.auth.signInWithPassword({
       email,
@@ -47,6 +69,8 @@ export default function Index() {
             autoCapitalize="none"
             keyboardType="email-address"
           />
+          {errors.includes('email.empty') && <Text className="mb-1 text-base font-medium text-red-600">Error : Email should not be empty</Text>}
+          {errors.includes('email.invalid') && <Text className="mb-1 text-base font-medium text-red-600">Error : Email is not valid</Text>}
         </View>
 
         <View className="my-1">
@@ -59,6 +83,7 @@ export default function Index() {
             secureTextEntry
             autoCapitalize="none"
           />
+        {errors.includes('password.empty') && <Text className="mb-1 text-base font-medium text-red-600">Error : Password should not be empty</Text>}
         </View>
 
         <View className="my-1">
