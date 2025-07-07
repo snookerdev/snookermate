@@ -62,8 +62,8 @@ export default function Index() {
         <View className="my-1">
           <Text className="mb-1 text-base font-medium text-gray-800">Email</Text>
           <TextInput
-            className="h-11 border border-gray-300 rounded-md"
-            placeholder="email@address.com"
+            className="h-11 px-3 border border-gray-300 rounded-md"
+            placeholder="stephen.hendry@gmail.com"
             onChangeText={setEmail}
             value={email}
             autoCapitalize="none"
@@ -76,7 +76,7 @@ export default function Index() {
         <View className="my-1">
           <Text className="mb-1 text-base font-medium text-gray-800">Password</Text>
           <TextInput
-            className="h-11 border border-gray-300 rounded-md"
+            className="h-11 px-3 border border-gray-300 rounded-md"
             placeholder="Password"
             onChangeText={setPassword}
             value={password}
