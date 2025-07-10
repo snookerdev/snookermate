@@ -1,10 +1,11 @@
 import { supabase } from "@/utils/supbase";
 import { Session } from "@supabase/supabase-js";
-import { Link } from "expo-router";
+import { Link, useRouter } from "expo-router";
 import { useEffect, useState } from "react";
 import { ActivityIndicator, Alert, Text, TextInput, TouchableOpacity, View } from "react-native";
 
 export default function Index() {
+  const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
@@ -50,7 +51,8 @@ export default function Index() {
     if (error) {
       Alert.alert(error.message);
     } else {
-      Alert.alert('Logged in successfully');
+      router.replace('/home');
+      //Alert.alert('Logged in successfully');
     }
     setLoading(false);
   }
@@ -99,6 +101,20 @@ export default function Index() {
               <Text className="text-white font-semibold">Sign in</Text>
             )}
           </TouchableOpacity>
+        </View>
+
+        <View className="my-1">
+          <TouchableOpacity
+            className='h-11 bg-blue-600 rounded-md items-center justify-center'
+            onPress={() => router.replace('/home/(tabs)')}>
+              <Text className="text-white font-semibold">Temporary Sign in</Text>
+          </TouchableOpacity>
+        </View>
+
+        <View className="my-1">
+          <Link href="./home">
+            <Text className="text-blue-600 font-semibold">Temporary Sign In</Text>
+          </Link>
         </View>
 
         <View className="my-1">
