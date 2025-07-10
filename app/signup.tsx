@@ -1,7 +1,8 @@
 import { supabase } from '@/utils/supbase';
+import { showAlert } from '@/utils/UiUtils';
 import { useRouter } from 'expo-router';
 import React, { useState } from 'react';
-import { ActivityIndicator, Alert, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { ActivityIndicator, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
 export default function SignUp() {
   const router = useRouter();
@@ -35,18 +36,13 @@ export default function SignUp() {
     });
 
   if (error) {
-    Alert.alert('Signup failed', error.message);
+    showAlert('Signup failed', error.message);
   } else if (!session) {
-    Alert.alert(
+    showAlert(
       'Signup successful',
-      'Please check your inbox for email verification!',
-      [
-        {
-          text: 'OK',
-          onPress: () => router.replace('/'),
-        },
-      ]
+      'Please check your inbox for email verification!'
     );
+    router.replace('/');
   }
     setLoading(false);
   }
