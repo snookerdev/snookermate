@@ -1,3 +1,4 @@
+import { supabase } from '@/utils/supbase';
 import { useState } from "react";
 import { Text, TextInput, TouchableOpacity, View } from "react-native";
 
@@ -14,11 +15,27 @@ export default function CreateTournament() {
     const [errors, setErrors] = useState<string[]>([]);
     //const [showDatePicker, setShowDatePicker] = useState(false);
 
-    function saveTournament(tournament: typeof defaultTournament) {
+    async function saveTournament(tournament: typeof defaultTournament) {
         const validationErrors = getValidationErrors();
         setErrors(validationErrors);
         if (validationErrors.length > 0) {
             return;
+        }
+        // Save tournament to Supabase
+        const { error } = await supabase.from('tournaments').insert([{
+            name: tournament.name,
+            numberOfPlayers: tournament.numberOfPlayers,
+            venue: tournament.venue,
+            description: tournament.description,
+            fee: tournament.fee,
+            // Uncomment and add startDate if you add it back
+            // start_date: tournament.startDate,
+        }]);
+        if (error) {
+            alert('Error saving tournament: ' + error.message);
+        } else {
+            alert('Tournament created successfully!');
+            setTournament(defaultTournament);
         }
     }
 
@@ -119,7 +136,7 @@ export default function CreateTournament() {
             </View>
             <View className="my-1">
                 <TouchableOpacity className='h-11 bg-blue-600 rounded-md items-center justify-center' onPress={() => saveTournament(tournament)}>
-                    <Text className="text-white font-semibold">Save Torunament</Text>
+                    <Text className="text-white font-semibold">Save Tournament</Text>
                 </TouchableOpacity>
             </View>
         </View>
