@@ -68,11 +68,11 @@ export default function CreateTournament() {
             </View> */}
             <View className="my-1">
                 <Text className="mb-1 text-base font-medium text-gray-800">Number of Players</Text>
-                <View className="flex-row space-x-4">
+                <View className="flex-row justify-between">
                     {[8, 16, 32].map(num => (
                         <TouchableOpacity
                             key={num}
-                            className={`px-4 py-2 border rounded-md ${tournament.numberOfPlayers === num ? 'bg-green-600 border-green-600' : 'border-gray-300'}`}
+                            className={`flex-1 h-11 m-1 border rounded-md items-center justify-center ${tournament.numberOfPlayers === num ? 'bg-green-600 border-green-600' : 'border-gray-300'}`}
                             onPress={() => setTournament(prev => ({ ...prev, numberOfPlayers: num }))}
                         >
                             <Text className={tournament.numberOfPlayers === num ? 'text-white' : 'text-gray-800'}>{num}</Text>
