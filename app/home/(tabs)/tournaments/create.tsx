@@ -3,7 +3,7 @@ import { Text, TextInput, TouchableOpacity, View } from "react-native";
 
 export default function CreateTournament() {
     const defaultTournament = {
-        name : '',
+        name: '',
         //startDate: new Date(),
         numberOfPlayers: 8,
         venue: '',
@@ -11,7 +11,30 @@ export default function CreateTournament() {
         fee: 0
     };
     const [tournament, setTournament] = useState(defaultTournament);
+    const [errors, setErrors] = useState<string[]>([]);
     //const [showDatePicker, setShowDatePicker] = useState(false);
+
+    function saveTournament(tournament: typeof defaultTournament) {
+        const validationErrors = getValidationErrors();
+        setErrors(validationErrors);
+        if (validationErrors.length > 0) {
+            return;
+        }
+    }
+
+    function getValidationErrors(): string[] {
+        const errors: string[] = [];
+        if (tournament.name.trim() === '') {
+            errors.push('name.empty');
+        }
+        if (tournament.venue.trim() === '') {
+            errors.push('venue.empty');
+        }
+        if (tournament.fee < 0) {
+            errors.push('fee.invalid');
+        }
+        return errors;
+    }
 
     return (
         <View className="flex-1 m-4">
@@ -24,6 +47,7 @@ export default function CreateTournament() {
                     value={tournament.name}
                     autoCapitalize="none"
                 />
+                {errors.includes('name.empty') && (<Text className="mb-1 text-base font-medium text-red-600">Name cannot be blank</Text>)}
             </View>
             {/* <View className="my-1">
                 <Text className="mb-1 text-base font-medium text-gray-800">Start Date</Text>
@@ -65,6 +89,7 @@ export default function CreateTournament() {
                     value={tournament.venue}
                     autoCapitalize="none"
                 />
+                {errors.includes('venue.empty') && (<Text className="mb-1 text-base font-medium text-red-600">Venue cannot be blank</Text>)}
             </View>
             <View className="my-1">
                 <Text className="mb-1 text-base font-medium text-gray-800">Description</Text>
@@ -90,6 +115,12 @@ export default function CreateTournament() {
                     keyboardType="numeric"
                     inputMode='numeric'
                 />
+                {errors.includes('fee.invalid') && (<Text className="text-xs text-red-600 mt-1">Fee must be 0 or greater</Text>)}
+            </View>
+            <View className="my-1">
+                <TouchableOpacity className='h-11 bg-blue-600 rounded-md items-center justify-center' onPress={() => saveTournament(tournament)}>
+                    <Text className="text-white font-semibold">Save Torunament</Text>
+                </TouchableOpacity>
             </View>
         </View>
     );
