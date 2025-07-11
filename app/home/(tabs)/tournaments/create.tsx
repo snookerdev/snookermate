@@ -1,18 +1,17 @@
-import DateTimePicker from '@react-native-community/datetimepicker';
 import { useState } from "react";
 import { Text, TextInput, TouchableOpacity, View } from "react-native";
 
 export default function CreateTournament() {
     const defaultTournament = {
         name : '',
-        startDate: new Date(),
+        //startDate: new Date(),
         numberOfPlayers: 8,
         venue: '',
         description: '',
         fee: 0
     };
     const [tournament, setTournament] = useState(defaultTournament);
-    const [showDatePicker, setShowDatePicker] = useState(false);
+    //const [showDatePicker, setShowDatePicker] = useState(false);
 
     return (
         <View className="flex-1 m-4">
@@ -26,7 +25,7 @@ export default function CreateTournament() {
                     autoCapitalize="none"
                 />
             </View>
-            <View className="my-1">
+            {/* <View className="my-1">
                 <Text className="mb-1 text-base font-medium text-gray-800">Start Date</Text>
                 <TouchableOpacity onPress={() => setShowDatePicker(true)} className="h-11 px-3 border border-gray-300 rounded-md justify-center">
                     <Text>{tournament.startDate.toLocaleString()}</Text>
@@ -42,7 +41,7 @@ export default function CreateTournament() {
                         }}
                     />
                 )}
-            </View>
+            </View> */}
             <View className="my-1">
                 <Text className="mb-1 text-base font-medium text-gray-800">Number of Players</Text>
                 <View className="flex-row space-x-4">
