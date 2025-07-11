@@ -107,15 +107,15 @@ export default function Index() {
           <TouchableOpacity
             className='h-11 bg-blue-600 rounded-md items-center justify-center'
             onPress={() => router.replace('/home')}>
-              <Text className="text-white font-semibold">Temporary Sign in</Text>
+              <Text className="text-white font-semibold">Temporary Sign In - Only For Developemnt Purpose</Text>
           </TouchableOpacity>
         </View>
 
-        {/* <View className="my-1">
+        <View className="my-1">
           <Link href="./home">
-            <Text className="text-blue-600 font-semibold">Temporary Sign In</Text>
+            <Text className="text-blue-600 font-semibold">Temporary Sign In - Only For Developemnt Purpose</Text>
           </Link>
-        </View> */}
+        </View>
 
         <View className="my-5">
           <Link href="./signup">
