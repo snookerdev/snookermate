@@ -5,7 +5,7 @@ export default function TabLayout() {
     <Tabs screenOptions={{
       headerShown: false
       }}>
-      <Tabs.Screen name="index" options={{
+      <Tabs.Screen name="tournaments" options={{
           title: 'Tournaments',
           headerShown: false
         }}/>
